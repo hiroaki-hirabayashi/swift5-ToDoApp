@@ -1,0 +1,6 @@
+framework module Pods_Swift5_Todo_Swift5_TodoUITests {
+  umbrella header "Pods-Swift5 Todo-Swift5 TodoUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
