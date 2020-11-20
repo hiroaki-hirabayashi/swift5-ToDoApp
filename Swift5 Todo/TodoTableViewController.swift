@@ -12,7 +12,7 @@ import RealmSwift
 class TodoTableViewController: UITableViewController {
     
     
-    var textArray = String()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
