@@ -12,7 +12,7 @@ import RealmSwift
 class TodoTableViewController: UITableViewController {
     
     
-
+    var textArray = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,7 +168,18 @@ class TodoTableViewController: UITableViewController {
 
     }
     
+    @IBAction func unwindToTop(sender: UIStoryboardSegue) {
+           // 次画面のNavitukiViewControllerを受け取る
+           guard let sourceVC = sender.source as? EditViewController else {
+               // NavitukiViewControllerでなかったらやめる
+               return
+           }
+           
+           // NavitukiViewControllerの値を受け取って更新
+           
+           self.textArray = sourceVC.todoTextField.text!
 
+       }
 
 
 
