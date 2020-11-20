@@ -66,25 +66,31 @@ class TodoTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let realm = try! Realm()
+        let todos = realm.objects(Todo.self)
+        let textArray = todos[indexPath.row]
+
         //タップした時にその配列の番号を取り出して値を渡す
         let editVC = storyboard?.instantiateViewController(identifier: "EditView") as! EditViewController
-        navigationController?.pushViewController(editVC, animated: true)
+        print("koko!!!!!!!!!!" , textArray.text)
+        editVC.todoString = textArray.text
         
+        navigationController?.pushViewController(editVC, animated: true)
 
                
     }
-    
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            performSegue(withIdentifier: "EditView", sender: nil)
-            
-            if segue.identifier == "EditView" {
-                let editVC: EditViewController = (segue.destination as? EditViewController)!
-                editVC.todoString = textArray
 
-            }
-            
-    }
-    
+//        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//            performSegue(withIdentifier: "EditView", sender: nil)
+//
+//            if segue.identifier == "EditView" {
+//                let editVC: EditViewController = (segue.destination as? EditViewController)!
+//                editVC.todoString = textArray
+//
+////            }
+//
+//    }
+//
 
     
     //    //データ削除設定

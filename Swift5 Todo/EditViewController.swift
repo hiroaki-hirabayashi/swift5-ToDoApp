@@ -11,7 +11,7 @@ import RealmSwift
 
 class EditViewController: UIViewController {
     
-    var todoString = String()
+    var todoString = ""
     
     @IBOutlet weak var todoLabel: UILabel!
     
