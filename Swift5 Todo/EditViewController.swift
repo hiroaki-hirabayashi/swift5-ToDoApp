@@ -22,7 +22,6 @@ class EditViewController: UIViewController {
         
         todoTextField.text! = todoString
     }
-    
     //    override func viewWillAppear(_ animated: Bool) {
     //        super.viewWillAppear(animated)
     //
@@ -32,31 +31,36 @@ class EditViewController: UIViewController {
     
     
     @IBAction func tapEditButton(_ sender: Any) {
-
-        
         //タップした時にその配列の番号を取り出して値を渡す
         let todoVC = storyboard?.instantiateViewController(identifier: "TodoTableView") as! TodoTableViewController
         
         let realm = try! Realm()
-        let toBeUpdatedUserName = todoTextField.text!
-        let toBeUpdatedRecords = realm.objects(Todo.self)
-        
-        
         try! realm.write {
             editTodo.text = todoTextField.text!
-            
-//            for element in toBeUpdatedRecords{
-//             let element = todoTextField.text!
-//
-//
-//            }
         }
-
-        print("todo.text　確認", todoVC.nextTextArray, todoVC.todoArray)
         todoVC.tableView.reloadData()
-
+        
         navigationController?.pushViewController(todoVC, animated: true)
     }
+    
+    @IBAction func tapDeleteButton(_ sender: Any) {
+        //タップした時にその配列の番号を取り出して値を渡す
+        let todoVC = storyboard?.instantiateViewController(identifier: "TodoTableView") as! TodoTableViewController
+        
+        
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(editTodo)
+        }
+        todoVC.tableView.reloadData()
+        
+        navigationController?.pushViewController(todoVC, animated: true)
+    }
+    
 }
+
+
+
+
 
 
