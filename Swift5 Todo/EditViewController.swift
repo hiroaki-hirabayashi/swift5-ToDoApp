@@ -12,6 +12,7 @@ import RealmSwift
 class EditViewController: UIViewController {
     
     var todoString = ""
+    var editTodo = Todo()
     
     @IBOutlet weak var todoTextField: UITextField!
     
@@ -19,7 +20,7 @@ class EditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        todoTextField.text = todoString
+        todoTextField.text! = todoString
     }
     
     //    override func viewWillAppear(_ animated: Bool) {
@@ -36,21 +37,24 @@ class EditViewController: UIViewController {
         //タップした時にその配列の番号を取り出して値を渡す
         let todoVC = storyboard?.instantiateViewController(identifier: "TodoTableView") as! TodoTableViewController
         
-        todoVC.textArray = todoTextField.text!
         let realm = try! Realm()
-        let todo = Todo()
-        let todos = realm.objects(Todo.self)
-
-//        todo.text = todoVC.textArray
-
+        let toBeUpdatedUserName = todoTextField.text!
+        let toBeUpdatedRecords = realm.objects(Todo.self)
+        
         
         try! realm.write {
-            todo.text = todoVC.textArray
+            editTodo.text = todoTextField.text!
+            
+//            for element in toBeUpdatedRecords{
+//             let element = todoTextField.text!
+//
+//
+//            }
         }
-        
-        print("todo.text　確認", todo.text)
 
-//        todoVC.tableView.reloadData()
+        print("todo.text　確認", todoVC.nextTextArray, todoVC.todoArray)
+        todoVC.tableView.reloadData()
+
         navigationController?.pushViewController(todoVC, animated: true)
     }
 }

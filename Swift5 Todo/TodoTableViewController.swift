@@ -11,8 +11,15 @@ import RealmSwift
 
 class TodoTableViewController: UITableViewController {
     
-    
+    var realm = try! Realm()
+    var todoArray = Todo()
     var textArray = String()
+    
+    var nextTextArray = String()
+    var nextTodoArray = try! Realm()
+    var todo = Todo()
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +40,6 @@ class TodoTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //Realmをインスタンス化して使えるようにする
-        let realm = try! Realm()
         let todos = realm.objects(Todo.self)
         
         return todos.count
@@ -42,10 +48,9 @@ class TodoTableViewController: UITableViewController {
     //withIdentifierを設定した名前に合わせる
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let realm = try! Realm()
         let todos = realm.objects(Todo.self)
-        let textArray = todos[indexPath.row]
-        cell.textLabel?.text = textArray.text
+        todoArray = todos[indexPath.row]
+        cell.textLabel?.text = todoArray.text
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         return cell
@@ -66,33 +71,22 @@ class TodoTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let realm = try! Realm()
-        let todos = realm.objects(Todo.self)
-        let textArray = todos[indexPath.row]
+        var nextTodoArray = realm.objects(Todo.self)
 
+        var nextTextArray = nextTodoArray[indexPath.row]
         //タップした時にその配列の番号を取り出して値を渡す
         let editVC = storyboard?.instantiateViewController(identifier: "EditView") as! EditViewController
-        print("koko!!!!!!!!!!" , textArray.text)
-        editVC.todoString = textArray.text
+        print("koko!!!!!!!!!!" , textArray)
+        editVC.todoString = nextTextArray.text
+
+
+        editVC.editTodo = nextTodoArray[indexPath.row]
         
         navigationController?.pushViewController(editVC, animated: true)
 
                
     }
 
-//        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//            performSegue(withIdentifier: "EditView", sender: nil)
-//
-//            if segue.identifier == "EditView" {
-//                let editVC: EditViewController = (segue.destination as? EditViewController)!
-//                editVC.todoString = textArray
-//
-////            }
-//
-//    }
-//
-
-    
     //    //データ削除設定
       //    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
       //        if editingStyle == .delete {
@@ -115,18 +109,6 @@ class TodoTableViewController: UITableViewController {
       //        }
       //    }
       //
-      
-
-
-
-//
-//func tapEditButton(_ sender: Any) {
-//    let editVC = storyboard?.instantiateViewController(withIdentifier: "EditView") as! EditViewController
-//    navigationController?.pushViewController(editVC, animated: true)
-//
-//
-//}
-
 
     @IBAction func tapAddButton(_ sender: Any) {
             
@@ -134,19 +116,18 @@ class TodoTableViewController: UITableViewController {
             let action = UIAlertAction(title: "追加", style: .default){
                 (void) in
                 let textField = alertController.textFields![0] as UITextField
+               
                 if let text = textField.text {
-                    
-                    let todo = Todo()
-                    todo.text = text
+                    self.todo.text = text
                     
                     //Realmをインスタンス化して使えるようにする
-                    let realm = try! Realm()
                     // Persist your data easily 永続化
-                    try! realm.write {
-                        realm.add(todo)
+                    try! self.realm.write {
+                        self.realm.add(self.todo)
                     }
                     
                     self.tableView.reloadData()
+
                     
                 }
                 
@@ -162,24 +143,20 @@ class TodoTableViewController: UITableViewController {
             alertController.addAction(cancel)
             
             present(alertController, animated: true, completion: nil)
-            
-            
-        
-
     }
     
-    @IBAction func unwindToTop(sender: UIStoryboardSegue) {
-           // 次画面のNavitukiViewControllerを受け取る
-           guard let sourceVC = sender.source as? EditViewController else {
-               // NavitukiViewControllerでなかったらやめる
-               return
-           }
-           
-           // NavitukiViewControllerの値を受け取って更新
-           
-           self.textArray = sourceVC.todoTextField.text!
+//    @IBAction func unwindToTop(sender: UIStoryboardSegue) {
+//           // 次画面のNavitukiViewControllerを受け取る
+//           guard let sourceVC = sender.source as? EditViewController else {
+//               // NavitukiViewControllerでなかったらやめる
+//               return
+//           }
+//
+//           // NavitukiViewControllerの値を受け取って更新
+//
+//           self.textArray = sourceVC.todoTextField.text!
 
-       }
+//       }
 
 
 
