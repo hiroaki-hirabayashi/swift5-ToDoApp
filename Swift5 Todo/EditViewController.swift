@@ -16,12 +16,12 @@ class EditViewController: UIViewController {
     
     @IBOutlet weak var todoTextField: UITextField!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         todoTextField.text! = todoString
     }
+    
     //    override func viewWillAppear(_ animated: Bool) {
     //        super.viewWillAppear(animated)
     //
@@ -39,23 +39,11 @@ class EditViewController: UIViewController {
             editTodo.text = todoTextField.text!
         }
         todoVC.tableView.reloadData()
-        
+        todoVC.settingView()
+        navigationItem.leftBarButtonItem?.isEnabled = false 
         navigationController?.pushViewController(todoVC, animated: true)
     }
     
-    @IBAction func tapDeleteButton(_ sender: Any) {
-        //タップした時にその配列の番号を取り出して値を渡す
-        let todoVC = storyboard?.instantiateViewController(identifier: "TodoTableView") as! TodoTableViewController
-        
-        
-        let realm = try! Realm()
-        try! realm.write {
-            realm.delete(editTodo)
-        }
-        todoVC.tableView.reloadData()
-        
-        navigationController?.pushViewController(todoVC, animated: true)
-    }
     
 }
 
