@@ -11,7 +11,6 @@ import RealmSwift
 
 class EditViewController: UIViewController {
     
-    var todoString = ""
     var editTodo = Todo()
     
     @IBOutlet weak var todoTextField: UITextField!
@@ -19,7 +18,7 @@ class EditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        todoTextField.text! = todoString
+        todoTextField.text! = editTodo.text
     }
     
     //    override func viewWillAppear(_ animated: Bool) {
