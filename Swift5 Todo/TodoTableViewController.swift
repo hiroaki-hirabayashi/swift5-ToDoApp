@@ -54,7 +54,7 @@ class TodoTableViewController: UITableViewController {
         let realms = realm.objects(Todo.self)
         let todoArray = realms[indexPath.row]
         cell.textLabel?.text = todoArray.text
-        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        cell.selectionStyle = .none
         
         return cell
     }
@@ -63,10 +63,10 @@ class TodoTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let realms = realm.objects(Todo.self)
         
-        var nextTextArray = realms[indexPath.row]
+        // var nextTextArray = realms[indexPath.row]
         //タップした時にその配列の番号を取り出して値を渡す
         let editVC = storyboard?.instantiateViewController(identifier: "EditView") as! EditViewController
-        editVC.todoString = nextTextArray.text
+        // editVC.todoString = nextTextArray.text
         editVC.editTodo = realms[indexPath.row]
         
         navigationController?.pushViewController(editVC, animated: true)
