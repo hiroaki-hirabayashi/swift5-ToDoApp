@@ -11,33 +11,40 @@ import RealmSwift
 
 class EditViewController: UIViewController {
     
-    var todoString = ""
+    var editTodo = Todo()
     
-    @IBOutlet weak var todoLabel: UILabel!
+    @IBOutlet weak var todoTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        todoLabel.text = todoString
-
-        
-        
+        todoTextField.text! = editTodo.text
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        super.viewWillAppear(animated)
+    //
+    //        navigationController?.isNavigationBarHidden = false
+    //
+    //    }
+    
+    
+    @IBAction func tapEditButton(_ sender: Any) {
+        //タップした時にその配列の番号を取り出して値を渡す
+        let todoVC = storyboard?.instantiateViewController(identifier: "TodoTableView") as! TodoTableViewController
         
-        navigationController?.isNavigationBarHidden = false
-        
+        let realm = try! Realm()
+        try! realm.write {
+            editTodo.text = todoTextField.text!
+        }
+        todoVC.tableView.reloadData()
+        todoVC.settingView()
+        navigationItem.leftBarButtonItem?.isEnabled = false 
+        navigationController?.pushViewController(todoVC, animated: true)
     }
-    
-    
-    
-    
     
     
 }
-
 
 
 

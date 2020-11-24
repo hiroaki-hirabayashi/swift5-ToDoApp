@@ -11,175 +11,124 @@ import RealmSwift
 
 class TodoTableViewController: UITableViewController {
     
-    
-
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        settingView()
         
-        
-        tableView.isEditing = true
+    }
+    
+    func settingView() {
+        //最初から編集ボタンを表示させない
+        tableView.isEditing = false
+        //セルをタップできるようにする
         tableView.allowsSelectionDuringEditing = true
-        
+        //並び替え、削除ボタンを表示 タイトル名変更　色
+        navigationItem.leftBarButtonItem = editButtonItem
+        navigationItem.leftBarButtonItem?.title = "削除、並び替え"
+        navigationItem.leftBarButtonItem?.tintColor = .blue
+        //Realmのパス
         print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
     
     
     // MARK: - Table view data source
     
+    //セクションラベルの数
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    //セルの行数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //Realmをインスタンス化して使えるようにする
-        let realm = try! Realm()
-        let todos = realm.objects(Todo.self)
+        let realms = realm.objects(Todo.self)
         
-        return todos.count
+        return realms.count
     }
     
-    //withIdentifierを設定した名前に合わせる
+    // セルの中身、データを表示する　//withIdentifierを設定した名前に合わせる
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let realm = try! Realm()
-        let todos = realm.objects(Todo.self)
-        let textArray = todos[indexPath.row]
-        cell.textLabel?.text = textArray.text
-        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        let realms = realm.objects(Todo.self)
+        let todoArray = realms[indexPath.row]
+        cell.textLabel?.text = todoArray.text
+        cell.selectionStyle = .none
         
         return cell
     }
     
-    // Override to support conditional editing of the table view.
+    //セルがタップされた時の処理
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let realms = realm.objects(Todo.self)
+        
+        // var nextTextArray = realms[indexPath.row]
+        //タップした時にその配列の番号を取り出して値を渡す
+        let editVC = storyboard?.instantiateViewController(identifier: "EditView") as! EditViewController
+        // editVC.todoString = nextTextArray.text
+        editVC.editTodo = realms[indexPath.row]
+        
+        navigationController?.pushViewController(editVC, animated: true)
+        
+    }
+    
+    //セルの並び替え
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+    }
+    
+    //セルを編集できるようにするかどうか設定
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+    //データ削除設定
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let realm = try! Realm()
+            let todos = realm.objects(Todo.self)
+            let todo = todos[indexPath.row]
+            
+            try! realm.write {
+                realm.delete(todo)
+            }
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
-        
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .none
-    }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let realm = try! Realm()
-        let todos = realm.objects(Todo.self)
-        let textArray = todos[indexPath.row]
-
-        //タップした時にその配列の番号を取り出して値を渡す
-        let editVC = storyboard?.instantiateViewController(identifier: "EditView") as! EditViewController
-        print("koko!!!!!!!!!!" , textArray.text)
-        editVC.todoString = textArray.text
-        
-        navigationController?.pushViewController(editVC, animated: true)
-
-               
-    }
-
-//        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//            performSegue(withIdentifier: "EditView", sender: nil)
-//
-//            if segue.identifier == "EditView" {
-//                let editVC: EditViewController = (segue.destination as? EditViewController)!
-//                editVC.todoString = textArray
-//
-////            }
-//
-//    }
-//
-
-    
-    //    //データ削除設定
-      //    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-      //        if editingStyle == .delete {
-      //
-      //            let realm = try! Realm()
-      //            let todos = realm.objects(Todo.self)
-      //            let todo = todos[indexPath.row]
-      //
-      //            try! realm.write {
-      //                realm.delete(todo)
-      //            }
-      //
-      //
-      //
-      //
-      //
-      //            tableView.deleteRows(at: [indexPath], with: .fade)
-      //        } else if editingStyle == .insert {
-      //
-      //        }
-      //    }
-      //
-      
-
-
-
-//
-//func tapEditButton(_ sender: Any) {
-//    let editVC = storyboard?.instantiateViewController(withIdentifier: "EditView") as! EditViewController
-//    navigationController?.pushViewController(editVC, animated: true)
-//
-//
-//}
-
-
+    //    編集ボタン
     @IBAction func tapAddButton(_ sender: Any) {
+        let realm = try! Realm()
+        let alertController = UIAlertController(title: "Todoを追加しますか？", message: nil, preferredStyle: .alert)
+        let action = UIAlertAction(title: "追加", style: .default){
+            (void) in
+            let textField = alertController.textFields![0] as UITextField
             
-            let alertController = UIAlertController(title: "Todoを追加しますか？", message: nil, preferredStyle: .alert)
-            let action = UIAlertAction(title: "追加", style: .default){
-                (void) in
-                let textField = alertController.textFields![0] as UITextField
-                if let text = textField.text {
-                    
-                    let todo = Todo()
-                    todo.text = text
-                    
-                    //Realmをインスタンス化して使えるようにする
-                    let realm = try! Realm()
-                    // Persist your data easily 永続化
-                    try! realm.write {
-                        realm.add(todo)
-                    }
-                    
-                    self.tableView.reloadData()
-                    
+            if let text = textField.text {
+                let todo = Todo()
+                todo.text = text
+                
+                try! realm.write {
+                    realm.add(todo)
                 }
-                
+                self.tableView.reloadData()
             }
-            
-            let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
-            
-            alertController.addTextField{(textField) in
-                textField.placeholder = "Todoの名前を入れてください。"
-                
-            }
-            alertController.addAction(action)
-            alertController.addAction(cancel)
-            
-            present(alertController, animated: true, completion: nil)
-            
-            
+        }
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+        alertController.addTextField{(textField) in
+            textField.placeholder = "Todoの名前を入れてください。"
+        }
+        alertController.addAction(action)
+        alertController.addAction(cancel)
         
-
+        present(alertController, animated: true, completion: nil)
     }
+    //    //編集ボタンをセルに表示させるか　させないか
+    //    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    //        return .delete
+    //
+    //    }
     
-
-
-
-
-
-
-
-
+    
+    
 }
-
-
-
-
-
-
