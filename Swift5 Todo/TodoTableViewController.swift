@@ -15,8 +15,6 @@ class TodoTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        settingView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
