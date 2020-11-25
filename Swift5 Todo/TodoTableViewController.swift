@@ -15,8 +15,12 @@ class TodoTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
         settingView()
-        
     }
     
     func settingView() {
@@ -26,7 +30,6 @@ class TodoTableViewController: UITableViewController {
         tableView.allowsSelectionDuringEditing = true
         //並び替え、削除ボタンを表示 タイトル名変更　色
         navigationItem.leftBarButtonItem = editButtonItem
-        navigationItem.leftBarButtonItem?.title = "削除、並び替え"
         navigationItem.leftBarButtonItem?.tintColor = .blue
         //Realmのパス
         print(Realm.Configuration.defaultConfiguration.fileURL!)

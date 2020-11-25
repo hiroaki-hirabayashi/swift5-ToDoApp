@@ -18,7 +18,7 @@ class EditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        todoTextField.text! = editTodo.text
+        todoTextField.text = editTodo.text
     }
     
     //    override func viewWillAppear(_ animated: Bool) {
@@ -40,7 +40,7 @@ class EditViewController: UIViewController {
         todoVC.tableView.reloadData()
         todoVC.settingView()
         navigationItem.leftBarButtonItem?.isEnabled = false 
-        navigationController?.pushViewController(todoVC, animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     
