@@ -14,6 +14,7 @@ class TodoTableViewController: UITableViewController {
     // MARK: - Properties
 
     let realm = try! Realm()
+    var indexPath = IndexPath(row: 0, section: 0)
 
     // MARK: - LifeCycle
 
@@ -62,24 +63,31 @@ class TodoTableViewController: UITableViewController {
         let todoArray = realms[indexPath.row]
         cell.textLabel?.text = todoArray.text
         cell.selectionStyle = .none
-        
+
         return cell
     }
     
     //セルがタップされた時の処理
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let realms = realm.objects(Todo.self)
-        
         // var nextTextArray = realms[indexPath.row]
         //タップした時にその配列の番号を取り出して値を渡す
         let editVC = storyboard?.instantiateViewController(identifier: "EditView") as! EditViewController
         // editVC.todoString = nextTextArray.text
         editVC.editTodo = realms[indexPath.row]
-        
+        editVC.indexPath = NSIndexPath(row: indexPath.row, section: 0) as IndexPath
         navigationController?.pushViewController(editVC, animated: true)
         
+
     }
-    
+//    
+//    func reloadCell() {
+//        let realms = realm.objects(Todo.self)
+//        indexPath = realms[indexPath.row]
+//        tableView.reloadRows(at: [indexPath], with: .fade)
+//    }
+
+  
     //セルの並び替え
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
     }
@@ -136,7 +144,5 @@ class TodoTableViewController: UITableViewController {
     //        return .delete
     //
     //    }
-    
-    
     
 }

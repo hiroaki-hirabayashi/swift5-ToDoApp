@@ -14,6 +14,7 @@ class EditViewController: UIViewController {
     // MARK: - Properties
 
     var editTodo = Todo()
+    var indexPath = IndexPath(row: 0, section: 0)
     
     @IBOutlet weak var todoTextField: UITextField!
   
@@ -23,8 +24,9 @@ class EditViewController: UIViewController {
         super.viewDidLoad()
         
         todoTextField.text = editTodo.text
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "更新", style: .plain, target: self, action: #selector(rowUpdata))
+
     }
-    
     //    override func viewWillAppear(_ animated: Bool) {
     //        super.viewWillAppear(animated)
     //
@@ -42,9 +44,8 @@ class EditViewController: UIViewController {
         try! realm.write {
             editTodo.text = todoTextField.text!
         }
-        todoVC.tableView.reloadData()
-        todoVC.settingView()
-        navigationItem.leftBarButtonItem?.isEnabled = false 
+        todoVC.tableView.reloadRows(at: [indexPath], with: .fade)
+        navigationItem.leftBarButtonItem?.isEnabled = false
         navigationController?.popViewController(animated: true)
     }
     
