@@ -10,16 +10,20 @@ import UIKit
 import RealmSwift
 
 class TodoTableViewController: UITableViewController {
-    
+
+    // MARK: - Properties
+
     let realm = try! Realm()
-    
+
+    // MARK: - LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
         settingView()
     }
     
@@ -99,6 +103,7 @@ class TodoTableViewController: UITableViewController {
         }
     }
     
+    // MARK: - function
     //    編集ボタン
     @IBAction func tapAddButton(_ sender: Any) {
         let realm = try! Realm()

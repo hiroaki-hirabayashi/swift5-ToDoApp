@@ -10,11 +10,15 @@ import UIKit
 import RealmSwift
 
 class EditViewController: UIViewController {
-    
+
+    // MARK: - Properties
+
     var editTodo = Todo()
     
     @IBOutlet weak var todoTextField: UITextField!
-    
+  
+    // MARK: - LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +32,7 @@ class EditViewController: UIViewController {
     //
     //    }
     
+    // MARK: - function
     
     @IBAction func tapEditButton(_ sender: Any) {
         //タップした時にその配列の番号を取り出して値を渡す
