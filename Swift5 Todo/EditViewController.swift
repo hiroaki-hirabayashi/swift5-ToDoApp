@@ -50,7 +50,7 @@ class EditViewController: UIViewController {
             editTodo.num = returnIndexPath
         }
         navigationController?.popViewController(animated: true)
-        delegate!.tapEditButton(num: returnIndexPath)
+        delegate?.tapEditButton(num: returnIndexPath)
     }
 }
 
