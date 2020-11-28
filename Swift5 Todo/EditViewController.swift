@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-protocol EditViewControllerDelegate {
+protocol EditViewControllerDelegate: class {
     func tapEditButton(num: Int)
 }
 
@@ -20,7 +20,7 @@ class EditViewController: UIViewController {
     var editTodo = Todo()
     //一覧画面から来たセル番号
     var returnIndexPath = Int()
-    var delegate: EditViewControllerDelegate! = nil
+    weak var delegate: EditViewControllerDelegate?
 
     
     @IBOutlet weak var todoTextField: UITextField!
@@ -45,14 +45,12 @@ class EditViewController: UIViewController {
 
     @IBAction func tapEditButton(_ sender: Any) {
         let realm = try! Realm()
-        let todos = realm.objects(Todo.self)
-
         try! realm.write {
             editTodo.text = todoTextField.text!
             editTodo.num = returnIndexPath
         }
         navigationController?.popViewController(animated: true)
-        delegate.tapEditButton(num: returnIndexPath)
+        delegate!.tapEditButton(num: returnIndexPath)
     }
 }
 

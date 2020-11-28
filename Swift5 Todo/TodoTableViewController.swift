@@ -15,8 +15,6 @@ class TodoTableViewController: UITableViewController, EditViewControllerDelegate
     // MARK: - Properties
 
     let realm = try! Realm()
-    //編集画面にセル番号を渡す変数
-    var indexNum = 0
     
     // MARK: - LifeCycle
 
@@ -75,7 +73,7 @@ class TodoTableViewController: UITableViewController, EditViewControllerDelegate
         //タップした時にその配列の番号を取り出して値を渡す
         let editVC = storyboard?.instantiateViewController(identifier: "EditView") as! EditViewController
         //編集画面にテキストとセル番号を渡す
-        indexNum = indexPath.row
+        let indexNum = indexPath.row
         editVC.editTodo = realms[indexPath.row]
         editVC.returnIndexPath = indexNum
         editVC.delegate = self
