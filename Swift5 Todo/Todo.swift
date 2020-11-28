@@ -12,8 +12,7 @@ import RealmSwift
 class Todo: Object {
     
     @objc dynamic var text = ""
-    var indexPath = IndexPath(row: 0, section: 0)
-
+    var num = Int()
     var done: Bool = false
 
 
