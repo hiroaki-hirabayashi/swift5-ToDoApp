@@ -9,18 +9,31 @@
 import UIKit
 import RealmSwift
 
+protocol EditViewControllerDelegate: class {
+    func tapEditButton(num: Int)
+}
+
 class EditViewController: UIViewController {
-    
+
+    // MARK: - Properties
+
     var editTodo = Todo()
+    //一覧画面から来たセル番号
+    var returnIndexPath = Int()
+    weak var delegate: EditViewControllerDelegate?
+
     
     @IBOutlet weak var todoTextField: UITextField!
-    
+  
+    // MARK: - LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         todoTextField.text = editTodo.text
+
     }
-    
     //    override func viewWillAppear(_ animated: Bool) {
     //        super.viewWillAppear(animated)
     //
@@ -28,22 +41,17 @@ class EditViewController: UIViewController {
     //
     //    }
     
-    
+    // MARK: - function
+
     @IBAction func tapEditButton(_ sender: Any) {
-        //タップした時にその配列の番号を取り出して値を渡す
-        let todoVC = storyboard?.instantiateViewController(identifier: "TodoTableView") as! TodoTableViewController
-        
         let realm = try! Realm()
         try! realm.write {
             editTodo.text = todoTextField.text!
+            editTodo.num = returnIndexPath
         }
-        todoVC.tableView.reloadData()
-        todoVC.settingView()
-        navigationItem.leftBarButtonItem?.isEnabled = false 
         navigationController?.popViewController(animated: true)
+        delegate?.tapEditButton(num: returnIndexPath)
     }
-    
-    
 }
 
 

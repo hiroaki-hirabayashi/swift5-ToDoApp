@@ -9,18 +9,24 @@
 import UIKit
 import RealmSwift
 
-class TodoTableViewController: UITableViewController {
+class TodoTableViewController: UITableViewController, EditViewControllerDelegate {
     
+
+    // MARK: - Properties
+
     let realm = try! Realm()
     
+    // MARK: - LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
         settingView()
+
     }
     
     func settingView() {
@@ -30,7 +36,6 @@ class TodoTableViewController: UITableViewController {
         tableView.allowsSelectionDuringEditing = true
         //並び替え、削除ボタンを表示 タイトル名変更　色
         navigationItem.leftBarButtonItem = editButtonItem
-        navigationItem.leftBarButtonItem?.tintColor = .blue
         //Realmのパス
         print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
@@ -65,15 +70,15 @@ class TodoTableViewController: UITableViewController {
     //セルがタップされた時の処理
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let realms = realm.objects(Todo.self)
-        
-        // var nextTextArray = realms[indexPath.row]
         //タップした時にその配列の番号を取り出して値を渡す
         let editVC = storyboard?.instantiateViewController(identifier: "EditView") as! EditViewController
-        // editVC.todoString = nextTextArray.text
+        //編集画面にテキストとセル番号を渡す
+        let indexNum = indexPath.row
         editVC.editTodo = realms[indexPath.row]
-        
+        editVC.returnIndexPath = indexNum
+        editVC.delegate = self
         navigationController?.pushViewController(editVC, animated: true)
-        
+
     }
     
     //セルの並び替え
@@ -99,6 +104,8 @@ class TodoTableViewController: UITableViewController {
         }
     }
     
+    // MARK: - function
+    
     //    編集ボタン
     @IBAction func tapAddButton(_ sender: Any) {
         let realm = try! Realm()
@@ -106,7 +113,6 @@ class TodoTableViewController: UITableViewController {
         let action = UIAlertAction(title: "追加", style: .default){
             (void) in
             let textField = alertController.textFields![0] as UITextField
-            
             if let text = textField.text {
                 let todo = Todo()
                 todo.text = text
@@ -126,12 +132,15 @@ class TodoTableViewController: UITableViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-    //    //編集ボタンをセルに表示させるか　させないか
-    //    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-    //        return .delete
-    //
-    //    }
     
-    
+    //編集画面から呼ばれる　delegete
+    func tapEditButton(num: Int) {
+        var indexPath = IndexPath(row: num, section: 0)
+        
+        print("check", num)
+        tableView.reloadRows(at: [indexPath], with: .fade)
+    }
     
 }
+
+
