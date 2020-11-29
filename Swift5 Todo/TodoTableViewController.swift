@@ -73,7 +73,7 @@ class TodoTableViewController: UITableViewController, EditViewControllerDelegate
         //タップした時にその配列の番号を取り出して値を渡す
         let editVC = storyboard?.instantiateViewController(identifier: "EditView") as! EditViewController
         //編集画面にテキストとセル番号を渡す
-        let indexNum = indexPath.row
+        let indexNum = indexPath
         editVC.editTodo = realms[indexPath.row]
         editVC.returnIndexPath = indexNum
         editVC.delegate = self
@@ -134,10 +134,10 @@ class TodoTableViewController: UITableViewController, EditViewControllerDelegate
     }
     
     //編集画面から呼ばれる　delegete
-    func tapEditButton(num: Int) {
-        var indexPath = IndexPath(row: num, section: 0)
+    func tapEditButton(indexPath: IndexPath) {
+//        var indexPath = IndexPath(row: num, section: 0)
         
-        print("check", num)
+        print("check", indexPath)
         tableView.reloadRows(at: [indexPath], with: .fade)
     }
     
