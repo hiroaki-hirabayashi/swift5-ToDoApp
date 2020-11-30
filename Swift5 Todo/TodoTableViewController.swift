@@ -73,9 +73,9 @@ class TodoTableViewController: UITableViewController, EditViewControllerDelegate
         //タップした時にその配列の番号を取り出して値を渡す
         let editVC = storyboard?.instantiateViewController(identifier: "EditView") as! EditViewController
         //編集画面にテキストとセル番号を渡す
-        let indexNum = indexPath
+
         editVC.editTodo = realms[indexPath.row]
-        editVC.returnIndexPath = indexNum
+        editVC.returnIndexPath = indexPath
         editVC.delegate = self
         navigationController?.pushViewController(editVC, animated: true)
 
