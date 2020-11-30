@@ -30,16 +30,8 @@ class EditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         todoTextField.text = editTodo.text
-
     }
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        super.viewWillAppear(animated)
-    //
-    //        navigationController?.isNavigationBarHidden = false
-    //
-    //    }
     
     // MARK: - function
 
@@ -47,7 +39,6 @@ class EditViewController: UIViewController {
         let realm = try! Realm()
         try! realm.write {
             editTodo.text = todoTextField.text!
-//            editTodo.num = returnIndexPath
         }
         navigationController?.popViewController(animated: true)
         delegate?.tapEditButton(indexPath: returnIndexPath )

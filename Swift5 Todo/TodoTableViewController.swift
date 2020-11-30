@@ -25,14 +25,11 @@ class TodoTableViewController: UITableViewController, EditViewControllerDelegate
         //インスタンス化
         let realm = try! Realm()
         todoList = realm.objects(Todo.self)
-
-        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         settingView()
-
     }
     
     func settingView() {
@@ -56,38 +53,28 @@ class TodoTableViewController: UITableViewController, EditViewControllerDelegate
     
     //セルの行数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //Realmをインスタンス化して使えるようにする
-//        let realms = realm.objects(Todo.self)
-        
         return todoList.count
     }
     
     // セルの中身、データを表示する　//withIdentifierを設定した名前に合わせる
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-//        let realms = realm.objects(Todo.self)
-        let todoList: Todo = self.todoList[(indexPath as NSIndexPath).row];
-
-//        let todoArray = realms[indexPath.row]
+        let todoList: Todo = self.todoList[(indexPath).row]
         cell.textLabel?.text = todoList.text
         cell.selectionStyle = .none
         
         return cell
-
     }
     
     //セルがタップされた時の処理
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let realms = realm.objects(Todo.self)
         //タップした時にその配列の番号を取り出して値を渡す
         let editVC = storyboard?.instantiateViewController(identifier: "EditView") as! EditViewController
         //編集画面にテキストとセル番号を渡す
-
         editVC.editTodo = todoList[indexPath.row]
         editVC.returnIndexPath = indexPath
         editVC.delegate = self
         navigationController?.pushViewController(editVC, animated: true)
-
     }
     
     //セルの並び替え
