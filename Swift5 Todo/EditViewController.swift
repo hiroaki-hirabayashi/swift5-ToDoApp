@@ -47,7 +47,7 @@ class EditViewController: UIViewController {
         let realm = try! Realm()
         try! realm.write {
             editTodo.text = todoTextField.text!
-            editTodo.num = returnIndexPath
+//            editTodo.num = returnIndexPath
         }
         navigationController?.popViewController(animated: true)
         delegate?.tapEditButton(indexPath: returnIndexPath )
