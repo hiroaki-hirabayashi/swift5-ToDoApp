@@ -59,7 +59,7 @@ class TodoTableViewController: UITableViewController, EditViewControllerDelegate
     // セルの中身、データを表示する　//withIdentifierを設定した名前に合わせる
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let todoList: Todo = self.todoList[(indexPath).row]
+        let todoList: Todo = self.todoList[indexPath.row]
         cell.textLabel?.text = todoList.text
         cell.selectionStyle = .none
         
