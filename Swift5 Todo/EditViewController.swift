@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 protocol EditViewControllerDelegate: class {
-    func tapEditButton(num: Int)
+    func tapEditButton(indexPath: IndexPath)
 }
 
 class EditViewController: UIViewController {
@@ -19,7 +19,7 @@ class EditViewController: UIViewController {
 
     var editTodo = Todo()
     //一覧画面から来たセル番号
-    var returnIndexPath = Int()
+    var returnIndexPath = IndexPath()
     weak var delegate: EditViewControllerDelegate?
 
     
@@ -50,7 +50,7 @@ class EditViewController: UIViewController {
             editTodo.num = returnIndexPath
         }
         navigationController?.popViewController(animated: true)
-        delegate?.tapEditButton(num: returnIndexPath)
+        delegate?.tapEditButton(indexPath: returnIndexPath )
     }
 }
 
