@@ -14,9 +14,9 @@ class TodoViewController: UIViewController {
     // MARK: - Propertie
     
     @IBOutlet weak var tableView: UITableView!
-    let realm = try! Realm()
+    private let realm = try! Realm()
     //Realmから受け取るデータを入れる変数
-    var todoList: Results<Todo>!
+    private var todoList: Results<Todo>!
     
     // MARK: - LifeCycle
     
@@ -44,7 +44,7 @@ class TodoViewController: UIViewController {
     
     // MARK: - function
     
-    func settingView() {
+    private func settingView() {
         //最初から編集ボタンを表示させない
         tableView.isEditing = false
         //セルをタップできるようにする
