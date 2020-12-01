@@ -13,7 +13,7 @@ class Todo: Object {
     
     @objc dynamic var text = ""
     
-    var done: Bool = false
+    var done = false
 
 
 }
