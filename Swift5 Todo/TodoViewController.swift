@@ -25,7 +25,6 @@ class TodoViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        self.view.addSubview(tableView)
         //インスタンス化
         let realm = try! Realm()
         todoList = realm.objects(Todo.self)
@@ -41,7 +40,7 @@ class TodoViewController: UIViewController {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
     }
-
+    
     
     // MARK: - function
     
@@ -55,10 +54,10 @@ class TodoViewController: UIViewController {
         //Realmのパス
         print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
-
+    
     //Todo追加ボタン
     @IBAction func tapTodoAddButton(_ sender: Any) {
-    let realm = try! Realm()
+        let realm = try! Realm()
         let alertController = UIAlertController(title: "Todoを追加しますか？", message: nil, preferredStyle: .alert)
         let action = UIAlertAction(title: "追加", style: .default){
             (void) in
@@ -71,17 +70,17 @@ class TodoViewController: UIViewController {
                     realm.add(todo)
                 }
                 self.tableView.reloadData()
-                }
             }
-            let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
-            alertController.addTextField{(textField) in
-                textField.placeholder = "Todoの名前を入れてください。"
-            }
-            alertController.addAction(action)
-            alertController.addAction(cancel)
-            
-            present(alertController, animated: true, completion: nil)
         }
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+        alertController.addTextField{(textField) in
+            textField.placeholder = "Todoの名前を入れてください。"
+        }
+        alertController.addAction(action)
+        alertController.addAction(cancel)
+        
+        present(alertController, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -108,7 +107,7 @@ extension TodoViewController: UITableViewDataSource {
         return cell
     }
     
-       //セルの並び替え
+    //セルの並び替え
     func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
     }
     
@@ -151,7 +150,7 @@ extension TodoViewController: EditViewControllerDelegate {
     //編集画面から呼ばれる　delegete
     func tapEditButton(indexPath: IndexPath) {
         print("check", indexPath)
-    tableView.reloadRows(at: [indexPath], with: .fade)
+        tableView.reloadRows(at: [indexPath], with: .fade)
     }
 }
 
