@@ -15,7 +15,7 @@ protocol EditViewControllerDelegate: class {
 
 class EditViewController: UIViewController {
 
-    // MARK: - Properties
+    // MARK: - Propertie
 
     var editTodo = Todo()
     //一覧画面から来たセル番号
