@@ -143,14 +143,9 @@
 		E7BE1CF52477102C0046F175 /* Swift5 Todo */ = {
 			isa = PBXGroup;
 			children = (
-				E7BE1CF62477102C0046F175 /* AppDelegate.swift */,
-				E7BE1CF82477102C0046F175 /* SceneDelegate.swift */,
-				E7853C672575DDC100E0DAFE /* TodoViewController.swift */,
-				E77DD1692564E203009005F4 /* EditViewController.swift */,
-				E776CCBD247810640064420F /* Todo.swift */,
-				E7BE1CFC2477102C0046F175 /* Main.storyboard */,
-				E7BE1CFF2477102F0046F175 /* Assets.xcassets */,
-				E7BE1D012477102F0046F175 /* LaunchScreen.storyboard */,
+				E7EA2E2C257771D40009CB08 /* Model */,
+				E7EA2E2D257772620009CB08 /* View */,
+				E7EA2E2E2577726E0009CB08 /* Controller */,
 				E7BE1D042477102F0046F175 /* Info.plist */,
 			);
 			path = "Swift5 Todo";
@@ -172,6 +167,35 @@
 				E7BE1D1A2477102F0046F175 /* Info.plist */,
 			);
 			path = "Swift5 TodoUITests";
+			sourceTree = "<group>";
+		};
+		E7EA2E2C257771D40009CB08 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E776CCBD247810640064420F /* Todo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E7EA2E2D257772620009CB08 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E7BE1CFC2477102C0046F175 /* Main.storyboard */,
+				E7BE1CFF2477102F0046F175 /* Assets.xcassets */,
+				E7BE1D012477102F0046F175 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E7EA2E2E2577726E0009CB08 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E7BE1CF62477102C0046F175 /* AppDelegate.swift */,
+				E7BE1CF82477102C0046F175 /* SceneDelegate.swift */,
+				E7853C672575DDC100E0DAFE /* TodoViewController.swift */,
+				E77DD1692564E203009005F4 /* EditViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

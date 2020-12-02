@@ -65,7 +65,7 @@ class TodoViewController: UIViewController {
             if let text = textField.text {
                 let todo = Todo()
                 todo.text = text
-                
+
                 try! realm.write {
                     realm.add(todo)
                 }
@@ -78,9 +78,9 @@ class TodoViewController: UIViewController {
         }
         alertController.addAction(action)
         alertController.addAction(cancel)
-        
+
         present(alertController, animated: true, completion: nil)
-    }
+   }
 }
 
 // MARK: - UITableViewDataSource
@@ -153,6 +153,7 @@ extension TodoViewController: EditViewControllerDelegate {
         tableView.reloadRows(at: [indexPath], with: .fade)
     }
 }
+
 
 
 
