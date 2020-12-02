@@ -19,6 +19,7 @@
 		E7BE1D032477102F0046F175 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BE1D012477102F0046F175 /* LaunchScreen.storyboard */; };
 		E7BE1D0E2477102F0046F175 /* Swift5_TodoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BE1D0D2477102F0046F175 /* Swift5_TodoTests.swift */; };
 		E7BE1D192477102F0046F175 /* Swift5_TodoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BE1D182477102F0046F175 /* Swift5_TodoUITests.swift */; };
+		E7EA2E30257778040009CB08 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EA2E2F257778040009CB08 /* AddViewController.swift */; };
 		F8964EB1C176B86039AC4AE4 /* Pods_Swift5_Todo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3392577F8EB2334DBBEEB7C /* Pods_Swift5_Todo.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		E7BE1D142477102F0046F175 /* Swift5 TodoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift5 TodoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7BE1D182477102F0046F175 /* Swift5_TodoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift5_TodoUITests.swift; sourceTree = "<group>"; };
 		E7BE1D1A2477102F0046F175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7EA2E2F257778040009CB08 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		F3392577F8EB2334DBBEEB7C /* Pods_Swift5_Todo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swift5_Todo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -194,6 +196,7 @@
 				E7BE1CF82477102C0046F175 /* SceneDelegate.swift */,
 				E7853C672575DDC100E0DAFE /* TodoViewController.swift */,
 				E77DD1692564E203009005F4 /* EditViewController.swift */,
+				E7EA2E2F257778040009CB08 /* AddViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 			files = (
 				E77DD16A2564E203009005F4 /* EditViewController.swift in Sources */,
 				E7BE1CF72477102C0046F175 /* AppDelegate.swift in Sources */,
+				E7EA2E30257778040009CB08 /* AddViewController.swift in Sources */,
 				E7BE1CF92477102C0046F175 /* SceneDelegate.swift in Sources */,
 				E7853C682575DDC100E0DAFE /* TodoViewController.swift in Sources */,
 				E776CCBE247810640064420F /* Todo.swift in Sources */,

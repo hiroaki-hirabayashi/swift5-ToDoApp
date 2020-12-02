@@ -55,31 +55,34 @@ class TodoViewController: UIViewController {
         print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
     
-    //Todo追加ボタン
-    @IBAction func tapTodoAddButton(_ sender: Any) {
-        let realm = try! Realm()
-        let alertController = UIAlertController(title: "Todoを追加しますか？", message: nil, preferredStyle: .alert)
-        let action = UIAlertAction(title: "追加", style: .default){
-            (void) in
-            let textField = alertController.textFields![0] as UITextField
-            if let text = textField.text {
-                let todo = Todo()
-                todo.text = text
+    //Todo追加画面へ
+    @IBAction func tapAddScreenTransitionButton(_ sender: Any) {
+        let addVC = storyboard?.instantiateViewController(identifier: "AddVC") as! AddViewController
+        navigationController?.pushViewController(addVC, animated: true)
 
-                try! realm.write {
-                    realm.add(todo)
-                }
-                self.tableView.reloadData()
-            }
-        }
-        let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
-        alertController.addTextField{(textField) in
-            textField.placeholder = "Todoの名前を入れてください。"
-        }
-        alertController.addAction(action)
-        alertController.addAction(cancel)
-
-        present(alertController, animated: true, completion: nil)
+//        let realm = try! Realm()
+//        let alertController = UIAlertController(title: "Todoを追加しますか？", message: nil, preferredStyle: .alert)
+//        let action = UIAlertAction(title: "追加", style: .default){
+//            (void) in
+//            let textField = alertController.textFields![0] as UITextField
+//            if let text = textField.text {
+//                let todo = Todo()
+//                todo.text = text
+//
+//                try! realm.write {
+//                    realm.add(todo)
+//                }
+//                self.tableView.reloadData()
+//            }
+//        }
+//        let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+//        alertController.addTextField{(textField) in
+//            textField.placeholder = "Todoの名前を入れてください。"
+//        }
+//        alertController.addAction(action)
+//        alertController.addAction(cancel)
+//
+//        present(alertController, animated: true, completion: nil)
    }
 }
 
@@ -136,7 +139,7 @@ extension TodoViewController: UITableViewDelegate {
     //セルがタップされた時の処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //タップした時にその配列の番号を取り出して値を渡す
-        let editVC = storyboard?.instantiateViewController(identifier: "EditView") as! EditViewController
+        let editVC = storyboard?.instantiateViewController(identifier: "EditVC") as! EditViewController
         //編集画面にテキストとセル番号を渡す
         editVC.editTodo = todoList[indexPath.row]
         editVC.returnIndexPath = indexPath
