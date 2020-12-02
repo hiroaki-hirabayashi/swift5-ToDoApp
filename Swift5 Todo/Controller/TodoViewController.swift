@@ -12,14 +12,12 @@ import RealmSwift
 class TodoViewController: UIViewController {
     
     // MARK: - Propertie
-    
     @IBOutlet weak var tableView: UITableView!
     private let realm = try! Realm()
     //Realmから受け取るデータを入れる変数
     private var todoList: Results<Todo>!
     
     // MARK: - LifeCycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -43,7 +41,6 @@ class TodoViewController: UIViewController {
     
     
     // MARK: - function
-    
     private func settingView() {
         //最初から編集ボタンを表示させない
         tableView.isEditing = false
@@ -58,36 +55,13 @@ class TodoViewController: UIViewController {
     //Todo追加画面へ
     @IBAction func tapAddScreenTransitionButton(_ sender: Any) {
         let addVC = storyboard?.instantiateViewController(identifier: "AddVC") as! AddViewController
+        addVC.delegate = self
         navigationController?.pushViewController(addVC, animated: true)
-
-//        let realm = try! Realm()
-//        let alertController = UIAlertController(title: "Todoを追加しますか？", message: nil, preferredStyle: .alert)
-//        let action = UIAlertAction(title: "追加", style: .default){
-//            (void) in
-//            let textField = alertController.textFields![0] as UITextField
-//            if let text = textField.text {
-//                let todo = Todo()
-//                todo.text = text
-//
-//                try! realm.write {
-//                    realm.add(todo)
-//                }
-//                self.tableView.reloadData()
-//            }
-//        }
-//        let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
-//        alertController.addTextField{(textField) in
-//            textField.placeholder = "Todoの名前を入れてください。"
-//        }
-//        alertController.addAction(action)
-//        alertController.addAction(cancel)
-//
-//        present(alertController, animated: true, completion: nil)
    }
+
 }
 
 // MARK: - UITableViewDataSource
-
 extension TodoViewController: UITableViewDataSource {
     
     //セクションラベルの数
@@ -139,7 +113,8 @@ extension TodoViewController: UITableViewDelegate {
     //セルがタップされた時の処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //タップした時にその配列の番号を取り出して値を渡す
-        let editVC = storyboard?.instantiateViewController(identifier: "EditVC") as! EditViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let editVC = storyboard.instantiateViewController(identifier: "EditVC") as! EditViewController
         //編集画面にテキストとセル番号を渡す
         editVC.editTodo = todoList[indexPath.row]
         editVC.returnIndexPath = indexPath
@@ -152,11 +127,16 @@ extension TodoViewController: UITableViewDelegate {
 extension TodoViewController: EditViewControllerDelegate {
     //編集画面から呼ばれる　delegete
     func tapEditButton(indexPath: IndexPath) {
-        print("check", indexPath)
         tableView.reloadRows(at: [indexPath], with: .fade)
     }
 }
-
+// MARK: - AddViewControllerDelegate
+extension TodoViewController: AddViewControllerDelegate {
+    func tapAddTodoButton() {
+        tableView.reloadData()
+    }
+    
+}
 
 
 

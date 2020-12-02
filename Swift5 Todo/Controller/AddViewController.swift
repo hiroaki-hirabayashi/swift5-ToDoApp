@@ -7,24 +7,36 @@
 //
 
 import UIKit
+import RealmSwift
 
-class AddViewController: UIViewController {
+protocol AddViewControllerDelegate: class {
+    func tapAddTodoButton()
+}
 
+final class AddViewController: UIViewController {
+    
+    // MARK: - Propertie
+    @IBOutlet weak var todoTextField: UITextField!
+    weak var delegate: AddViewControllerDelegate?
+
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: - function
+    @IBAction func tapAddTodoButton(_ sender: Any) {
+        let realm = try! Realm()
+        if let text = todoTextField.text {
+            let todo = Todo()
+            todo.text = text
+            
+            try! realm.write {
+                realm.add(todo)
+            }
+            navigationController?.popViewController(animated: true)
+            delegate?.tapAddTodoButton()
+        }
     }
-    */
-
+    
 }

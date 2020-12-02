@@ -57,7 +57,7 @@
         <!--Add View Controller-->
         <scene sceneID="MGK-NI-Dat">
             <objects>
-                <viewController id="Axt-df-AJX" customClass="AddViewController" customModule="Swift5_Todo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Axt-df-AJX" customClass="AddViewController" customModule="Swift5_Todo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OeT-PX-06O">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -76,11 +76,17 @@
                                 <state key="normal" title="Tood追加">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="tapAddTodoButton:" destination="Axt-df-AJX" eventType="touchUpInside" id="vwl-Bm-IBg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="IIC-of-9x5"/>
                     </view>
+                    <connections>
+                        <outlet property="todoTextField" destination="tjd-qf-NMJ" id="bqM-5m-014"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Txy-gi-hrQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -142,7 +148,7 @@
         <!--編集画面-->
         <scene sceneID="qi3-3Y-QsZ">
             <objects>
-                <viewController storyboardIdentifier="EditView" title="編集画面" useStoryboardIdentifierAsRestorationIdentifier="YES" id="l5y-Gp-rQP" customClass="EditViewController" customModule="Swift5_Todo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditVC" title="編集画面" useStoryboardIdentifierAsRestorationIdentifier="YES" id="l5y-Gp-rQP" customClass="EditViewController" customModule="Swift5_Todo" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RwM-dZ-ltc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
