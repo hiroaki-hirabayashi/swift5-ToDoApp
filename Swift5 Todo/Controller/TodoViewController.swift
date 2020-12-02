@@ -54,7 +54,8 @@ class TodoViewController: UIViewController {
     
     //Todo追加画面へ
     @IBAction func tapAddScreenTransitionButton(_ sender: Any) {
-        let addVC = storyboard?.instantiateViewController(identifier: "AddVC") as! AddViewController
+        let storyboard = UIStoryboard(name: "AddTodo", bundle: nil)
+        let addVC = storyboard.instantiateViewController(identifier: "AddVC") as! AddViewController
         addVC.delegate = self
         navigationController?.pushViewController(addVC, animated: true)
    }
@@ -113,7 +114,7 @@ extension TodoViewController: UITableViewDelegate {
     //セルがタップされた時の処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //タップした時にその配列の番号を取り出して値を渡す
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "EditTodo", bundle: nil)
         let editVC = storyboard.instantiateViewController(identifier: "EditVC") as! EditViewController
         //編集画面にテキストとセル番号を渡す
         editVC.editTodo = todoList[indexPath.row]

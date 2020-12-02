@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		78DB763B9A1A53A4D77B549C /* Pods_Swift5_Todo_Swift5_TodoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A713BF29A484251922EC2CAF /* Pods_Swift5_Todo_Swift5_TodoUITests.framework */; };
 		B81470703F9793D4AB2F4A91 /* Pods_Swift5_TodoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4250997DB71AA645DB65C85 /* Pods_Swift5_TodoTests.framework */; };
+		E74C60F72577E40A002DCE86 /* EditTodo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74C60F62577E40A002DCE86 /* EditTodo.storyboard */; };
+		E74C60F92577E434002DCE86 /* AddTodo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74C60F82577E434002DCE86 /* AddTodo.storyboard */; };
 		E776CCBE247810640064420F /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E776CCBD247810640064420F /* Todo.swift */; };
 		E77DD16A2564E203009005F4 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77DD1692564E203009005F4 /* EditViewController.swift */; };
 		E7853C682575DDC100E0DAFE /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7853C672575DDC100E0DAFE /* TodoViewController.swift */; };
@@ -49,6 +51,8 @@
 		98D45785E29D77B31C8BE8B5 /* Pods-Swift5 Todo-Swift5 TodoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift5 Todo-Swift5 TodoUITests.debug.xcconfig"; path = "Target Support Files/Pods-Swift5 Todo-Swift5 TodoUITests/Pods-Swift5 Todo-Swift5 TodoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A4250997DB71AA645DB65C85 /* Pods_Swift5_TodoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swift5_TodoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A713BF29A484251922EC2CAF /* Pods_Swift5_Todo_Swift5_TodoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swift5_Todo_Swift5_TodoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E74C60F62577E40A002DCE86 /* EditTodo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditTodo.storyboard; sourceTree = "<group>"; };
+		E74C60F82577E434002DCE86 /* AddTodo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTodo.storyboard; sourceTree = "<group>"; };
 		E776CCBD247810640064420F /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		E77DD1692564E203009005F4 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		E7853C672575DDC100E0DAFE /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
@@ -183,6 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				E7BE1CFC2477102C0046F175 /* Main.storyboard */,
+				E74C60F62577E40A002DCE86 /* EditTodo.storyboard */,
+				E74C60F82577E434002DCE86 /* AddTodo.storyboard */,
 				E7BE1CFF2477102F0046F175 /* Assets.xcassets */,
 				E7BE1D012477102F0046F175 /* LaunchScreen.storyboard */,
 			);
@@ -192,11 +198,11 @@
 		E7EA2E2E2577726E0009CB08 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E7BE1CF62477102C0046F175 /* AppDelegate.swift */,
-				E7BE1CF82477102C0046F175 /* SceneDelegate.swift */,
 				E7853C672575DDC100E0DAFE /* TodoViewController.swift */,
 				E77DD1692564E203009005F4 /* EditViewController.swift */,
 				E7EA2E2F257778040009CB08 /* AddViewController.swift */,
+				E7BE1CF62477102C0046F175 /* AppDelegate.swift */,
+				E7BE1CF82477102C0046F175 /* SceneDelegate.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -310,8 +316,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E74C60F72577E40A002DCE86 /* EditTodo.storyboard in Resources */,
 				E7BE1D032477102F0046F175 /* LaunchScreen.storyboard in Resources */,
 				E7BE1D002477102F0046F175 /* Assets.xcassets in Resources */,
+				E74C60F92577E434002DCE86 /* AddTodo.storyboard in Resources */,
 				E7BE1CFE2477102C0046F175 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

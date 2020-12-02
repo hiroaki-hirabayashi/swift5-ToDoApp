@@ -16,7 +16,6 @@ protocol EditViewControllerDelegate: class {
 final class EditViewController: UIViewController {
 
     // MARK: - Propertie
-
     var editTodo = Todo()
     //一覧画面から来たセル番号
     var returnIndexPath = IndexPath()
@@ -26,7 +25,6 @@ final class EditViewController: UIViewController {
     @IBOutlet weak var todoTextField: UITextField!
   
     // MARK: - LifeCycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,7 +32,6 @@ final class EditViewController: UIViewController {
     }
     
     // MARK: - function
-
     @IBAction func tapEditButton(_ sender: Any) {
         let realm = try! Realm()
         try! realm.write {
