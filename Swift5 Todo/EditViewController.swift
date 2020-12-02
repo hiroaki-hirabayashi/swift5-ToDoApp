@@ -13,7 +13,7 @@ protocol EditViewControllerDelegate: class {
     func tapEditButton(indexPath: IndexPath)
 }
 
-class EditViewController: UIViewController {
+final class EditViewController: UIViewController {
 
     // MARK: - Propertie
 
