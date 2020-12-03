@@ -16,12 +16,16 @@ protocol AddViewControllerDelegate: class {
 final class AddViewController: UIViewController {
     
     // MARK: - Propertie
-    @IBOutlet weak var todoTextField: UITextField!
+    @IBOutlet private weak var todoTextField: UITextField!
+    @IBOutlet private weak var todoRegisterButton: UIButton!
     weak var delegate: AddViewControllerDelegate?
 
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        todoTextField.delegate = self
+        todoRegisterButton.isEnabled = false
+        todoRegisterButton.backgroundColor = .darkGray
     }
     
     // MARK: - function
@@ -38,5 +42,18 @@ final class AddViewController: UIViewController {
             delegate?.tapAddTodoButton()
         }
     }
-    
 }
+// MARK: - todoTextFieldDelegate
+extension AddViewController: UITextFieldDelegate {
+    internal func textFieldDidChangeSelection(_ textField: UITextField) {
+        if  todoTextField.text?.isEmpty == true {
+            todoRegisterButton.isEnabled = false
+            todoRegisterButton.backgroundColor = .darkGray
+        } else {
+            todoRegisterButton.isEnabled = true
+            todoRegisterButton.backgroundColor = .systemGreen
+        }
+
+    }
+}
+

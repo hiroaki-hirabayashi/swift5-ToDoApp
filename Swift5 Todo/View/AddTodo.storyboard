@@ -24,10 +24,10 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L2a-lv-RNe">
                                 <rect key="frame" x="16" y="233" width="343" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Tood追加">
-                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="tapAddTodoButton:" destination="rIe-Rl-a5H" eventType="touchUpInside" id="Zs6-MX-92B"/>
@@ -38,6 +38,7 @@
                         <viewLayoutGuide key="safeArea" id="hij-oZ-ZcD"/>
                     </view>
                     <connections>
+                        <outlet property="todoRegisterButton" destination="L2a-lv-RNe" id="ncy-k3-wkt"/>
                         <outlet property="todoTextField" destination="5Oi-5F-Yyr" id="ZrT-Ob-Xot"/>
                     </connections>
                 </viewController>
