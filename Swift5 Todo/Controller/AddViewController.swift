@@ -16,8 +16,8 @@ protocol AddViewControllerDelegate: class {
 final class AddViewController: UIViewController {
     
     // MARK: - Propertie
-    @IBOutlet weak var todoTextField: UITextField!
-    @IBOutlet weak var todoRegisterButton: UIButton!
+    @IBOutlet private weak var todoTextField: UITextField!
+    @IBOutlet private weak var todoRegisterButton: UIButton!
     weak var delegate: AddViewControllerDelegate?
 
     // MARK: - LifeCycle
@@ -46,7 +46,7 @@ final class AddViewController: UIViewController {
 // MARK: - todoTextFieldDelegate
 extension AddViewController: UITextFieldDelegate {
     internal func textFieldDidChangeSelection(_ textField: UITextField) {
-        if todoTextField.text?.isEmpty ?? false {
+        if todoTextField.text == nil {
             todoRegisterButton.isEnabled = false
             todoRegisterButton.backgroundColor = .darkGray
         } else {
