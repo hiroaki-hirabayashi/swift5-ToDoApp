@@ -22,7 +22,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L2a-lv-RNe">
-                                <rect key="frame" x="16" y="233" width="343" height="53"/>
+                                <rect key="frame" x="16" y="303" width="343" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -33,18 +33,29 @@
                                     <action selector="tapAddTodoButton:" destination="rIe-Rl-a5H" eventType="touchUpInside" id="Zs6-MX-92B"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OZr-OM-jSa">
+                                <rect key="frame" x="63" y="225" width="248" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="優先度1"/>
+                                    <segment title="優先度2"/>
+                                    <segment title="優先度3"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="hij-oZ-ZcD"/>
                     </view>
                     <connections>
+                        <outlet property="prioritySegment" destination="OZr-OM-jSa" id="vRt-Re-Hrc"/>
                         <outlet property="todoRegisterButton" destination="L2a-lv-RNe" id="ncy-k3-wkt"/>
                         <outlet property="todoTextField" destination="5Oi-5F-Yyr" id="ZrT-Ob-Xot"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pkl-El-zMe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1737" y="-208"/>
+            <point key="canvasLocation" x="-303" y="-341"/>
         </scene>
     </scenes>
 </document>

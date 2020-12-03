@@ -18,42 +18,44 @@ final class AddViewController: UIViewController {
     // MARK: - Propertie
     @IBOutlet private weak var todoTextField: UITextField!
     @IBOutlet private weak var todoRegisterButton: UIButton!
+    @IBOutlet weak var prioritySegment: UISegmentedControl!
     weak var delegate: AddViewControllerDelegate?
-
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         todoTextField.delegate = self
         todoRegisterButton.isEnabled = false
         todoRegisterButton.backgroundColor = .darkGray
-    }
-    
-    // MARK: - function
-    @IBAction func tapAddTodoButton(_ sender: Any) {
-        let realm = try! Realm()
-        if let text = todoTextField.text {
-            let todo = Todo()
-            todo.text = text
-            
-            try! realm.write {
-                realm.add(todo)
+        prioritySegment.selectedSegmentIndex = -1
+        // MARK: - function
+        func tapAddTodoButton(_ sender: Any) {
+            let realm = try! Realm()
+            if let text = todoTextField.text {
+                let todo = Todo()
+                todo.text = text
+                
+                try! realm.write {
+                    realm.add(todo)
+                }
+                navigationController?.popViewController(animated: true)
+                delegate?.tapAddTodoButton()
             }
-            navigationController?.popViewController(animated: true)
-            delegate?.tapAddTodoButton()
         }
+        
     }
 }
 // MARK: - todoTextFieldDelegate
 extension AddViewController: UITextFieldDelegate {
     internal func textFieldDidChangeSelection(_ textField: UITextField) {
-        if  todoTextField.text?.isEmpty == true {
+        if  todoTextField.text?.isEmpty == true || prioritySegment.selectedSegmentIndex == -1 {
             todoRegisterButton.isEnabled = false
             todoRegisterButton.backgroundColor = .darkGray
         } else {
             todoRegisterButton.isEnabled = true
             todoRegisterButton.backgroundColor = .systemGreen
         }
-
+        
     }
 }
 
