@@ -9,17 +9,21 @@
 import UIKit
 import RealmSwift
 
-protocol AddViewControllerDelegate: class {
+protocol AddViewControllerDelegate: class {  //一覧画面から委任
     func tapAddTodoButton()
 }
 
 final class AddViewController: UIViewController {
     
     // MARK: - Propertie
+    weak var delegate: AddViewControllerDelegate?
     @IBOutlet private weak var todoTextField: UITextField!
     @IBOutlet private weak var todoRegisterButton: UIButton!
-    @IBOutlet weak var prioritySegment: UISegmentedControl!
-    weak var delegate: AddViewControllerDelegate?
+    @IBOutlet weak var prioritySegment: UISegmentedControl! {
+        didSet {
+            prioritySegment.addTarget(self, action: #selector(textFieldDidChangeSelection), for: .valueChanged)
+        }
+    }
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -28,22 +32,22 @@ final class AddViewController: UIViewController {
         todoRegisterButton.isEnabled = false
         todoRegisterButton.backgroundColor = .darkGray
         prioritySegment.selectedSegmentIndex = -1
-        // MARK: - function
-        func tapAddTodoButton(_ sender: Any) {
-            let realm = try! Realm()
-            if let text = todoTextField.text {
-                let todo = Todo()
-                todo.text = text
-                
-                try! realm.write {
-                    realm.add(todo)
-                }
-                navigationController?.popViewController(animated: true)
-                delegate?.tapAddTodoButton()
-            }
-        }
-        
     }
+    // MARK: - function
+    @IBAction func tapTodoRegister(_ sender: Any) { //+Todo追加ボタン押下時
+        let realm = try! Realm()
+        if let text = todoTextField.text {
+            let todo = Todo()
+            todo.text = text
+            
+            try! realm.write {
+                realm.add(todo)
+            }
+            navigationController?.popViewController(animated: true)
+            delegate?.tapAddTodoButton() //
+        }
+    }
+
 }
 // MARK: - todoTextFieldDelegate
 extension AddViewController: UITextFieldDelegate {
@@ -55,7 +59,7 @@ extension AddViewController: UITextFieldDelegate {
             todoRegisterButton.isEnabled = true
             todoRegisterButton.backgroundColor = .systemGreen
         }
-        
     }
+
 }
 

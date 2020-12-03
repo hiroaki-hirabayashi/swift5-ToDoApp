@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-protocol EditViewControllerDelegate: class {
+protocol EditViewControllerDelegate: class { //一覧画面から委任
     func tapEditButton(indexPath: IndexPath)
 }
 
@@ -38,7 +38,7 @@ final class EditViewController: UIViewController {
             editTodo.text = todoTextField.text!
         }
         navigationController?.popViewController(animated: true)
-        delegate?.tapEditButton(indexPath: returnIndexPath )
+        delegate?.tapEditButton(indexPath: returnIndexPath )  //一覧画面から渡されたindexPathをそのまま返す
     }
 }
 
