@@ -46,7 +46,7 @@ final class AddViewController: UIViewController {
 // MARK: - todoTextFieldDelegate
 extension AddViewController: UITextFieldDelegate {
     internal func textFieldDidChangeSelection(_ textField: UITextField) {
-        if todoTextField.text == nil {
+        if  todoTextField.text == nil || todoTextField.text?.isEmpty == true {
             todoRegisterButton.isEnabled = false
             todoRegisterButton.backgroundColor = .darkGray
         } else {
@@ -55,5 +55,5 @@ extension AddViewController: UITextFieldDelegate {
         }
 
     }
-    
 }
+
