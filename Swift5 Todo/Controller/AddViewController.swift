@@ -19,12 +19,8 @@ final class AddViewController: UIViewController {
     weak var delegate: AddViewControllerDelegate?
     @IBOutlet private weak var todoTextField: UITextField!
     @IBOutlet private weak var todoRegisterButton: UIButton!
-    @IBOutlet weak var prioritySegment: UISegmentedControl! {
-        didSet {
-            prioritySegment.addTarget(self, action: #selector(textFieldDidChangeSelection), for: .valueChanged)
-        }
-    }
-    
+    @IBOutlet weak var prioritySegment: UISegmentedControl!
+
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,16 +39,16 @@ final class AddViewController: UIViewController {
             try! realm.write {
                 realm.add(todo)
             }
+            
             navigationController?.popViewController(animated: true)
             delegate?.tapAddTodoButton() //
         }
     }
-
 }
 // MARK: - todoTextFieldDelegate
 extension AddViewController: UITextFieldDelegate {
     internal func textFieldDidChangeSelection(_ textField: UITextField) {
-        if  todoTextField.text?.isEmpty == true || prioritySegment.selectedSegmentIndex == -1 {
+        if  todoTextField.text?.isEmpty ?? true || prioritySegment.selectedSegmentIndex == -1 {
             todoRegisterButton.isEnabled = false
             todoRegisterButton.backgroundColor = .darkGray
         } else {
