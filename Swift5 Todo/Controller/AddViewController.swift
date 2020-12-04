@@ -49,7 +49,7 @@ final class AddViewController: UIViewController {
         }
     }
     
-    @IBAction private func prioritySegmentDidChangeSelection(_ sender: Any) {
+    @objc private func prioritySegmentDidChangeSelection(_ sender: Any) {
         if todoTextField.text?.isEmpty ?? true {
             todoRegisterButton.isEnabled = false
             todoRegisterButton.backgroundColor = .darkGray
