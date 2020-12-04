@@ -38,7 +38,7 @@ final class EditViewController: UIViewController {
             editTodo.text = todoTextField.text!
         }
         navigationController?.popViewController(animated: true)
-        delegate?.tapEditButton(indexPath: returnIndexPath )  //一覧画面から渡されたindexPathをそのまま返す
+        delegate?.tapEditButton(indexPath: returnIndexPath)  //一覧画面から渡されたindexPathをそのまま返す
     }
 }
 

@@ -43,7 +43,7 @@
                                 </segments>
                                 <color key="selectedSegmentTintColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <action selector="todoRegisterButtonEnabled:" destination="rIe-Rl-a5H" eventType="valueChanged" id="lMP-Qu-Fx2"/>
+                                    <action selector="prioritySegmentDidChangeSelection:" destination="rIe-Rl-a5H" eventType="valueChanged" id="nvv-44-Z6h"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>
@@ -51,7 +51,7 @@
                         <viewLayoutGuide key="safeArea" id="hij-oZ-ZcD"/>
                     </view>
                     <connections>
-                        <outlet property="prioritySegment" destination="OZr-OM-jSa" id="vRt-Re-Hrc"/>
+                        <outlet property="prioritySegment" destination="OZr-OM-jSa" id="bvY-tf-RnA"/>
                         <outlet property="todoRegisterButton" destination="L2a-lv-RNe" id="ncy-k3-wkt"/>
                         <outlet property="todoTextField" destination="5Oi-5F-Yyr" id="ZrT-Ob-Xot"/>
                     </connections>

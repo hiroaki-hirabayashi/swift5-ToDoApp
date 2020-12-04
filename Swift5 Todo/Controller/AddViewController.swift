@@ -19,19 +19,19 @@ final class AddViewController: UIViewController {
     weak var delegate: AddViewControllerDelegate?
     @IBOutlet private weak var todoTextField: UITextField!
     @IBOutlet private weak var todoRegisterButton: UIButton!
-    @IBOutlet weak var prioritySegment: UISegmentedControl! {
+    @IBOutlet private weak var prioritySegment: UISegmentedControl! {
         didSet {
-            prioritySegment.addTarget(self, action: #selector(todoRegisterButtonEnabled), for: .valueChanged)
+            prioritySegment.addTarget(self, action: #selector(prioritySegmentDidChangeSelection), for: .valueChanged)
         }
     }
-
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         todoTextField.delegate = self
         todoRegisterButton.isEnabled = false
         todoRegisterButton.backgroundColor = .darkGray
-        prioritySegment.isEnabled = false
+        prioritySegment.selectedSegmentIndex = -1
     }
     // MARK: - function
     @IBAction func tapTodoRegister(_ sender: Any) { //+Todo追加ボタン押下時
@@ -45,27 +45,32 @@ final class AddViewController: UIViewController {
             }
             
             navigationController?.popViewController(animated: true)
-            delegate?.tapAddTodoButton() //
+            delegate?.tapAddTodoButton()
         }
     }
     
-    @IBAction func todoRegisterButtonEnabled(_ sender: Any) {
-        todoRegisterButton.isEnabled = true
-        todoRegisterButton.backgroundColor = .systemGreen
+    @IBAction private func prioritySegmentDidChangeSelection(_ sender: Any) {
+        if todoTextField.text?.isEmpty ?? true {
+            todoRegisterButton.isEnabled = false
+            todoRegisterButton.backgroundColor = .darkGray
+        } else {
+            todoRegisterButton.isEnabled = true
+            todoRegisterButton.backgroundColor = .systemGreen
+        }
     }
 }
+
 // MARK: - todoTextFieldDelegate
 extension AddViewController: UITextFieldDelegate {
     internal func textFieldDidChangeSelection(_ textField: UITextField) {
-        if  todoTextField.text?.isEmpty ?? true {
+        if todoTextField.text?.isEmpty ?? true || prioritySegment.selectedSegmentIndex == -1 {
             todoRegisterButton.isEnabled = false
             todoRegisterButton.backgroundColor = .darkGray
-            prioritySegment.isEnabled = false
         } else {
-            prioritySegment.isEnabled = true
-            prioritySegment.selectedSegmentIndex = -1
+            todoRegisterButton.isEnabled = true
+            todoRegisterButton.backgroundColor = .systemGreen
         }
     }
-
+    
 }
 
