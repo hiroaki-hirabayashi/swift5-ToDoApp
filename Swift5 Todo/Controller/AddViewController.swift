@@ -58,11 +58,12 @@ final class AddViewController: UIViewController {
 extension AddViewController: UITextFieldDelegate {
     internal func textFieldDidChangeSelection(_ textField: UITextField) {
         if  todoTextField.text?.isEmpty ?? true {
-            prioritySegment.isEnabled = false
+            todoRegisterButton.isEnabled = false
             todoRegisterButton.backgroundColor = .darkGray
+            prioritySegment.isEnabled = false
         } else {
             prioritySegment.isEnabled = true
-            prioritySegment.selectedSegmentIndex = -1 
+            prioritySegment.selectedSegmentIndex = -1
         }
     }
 
