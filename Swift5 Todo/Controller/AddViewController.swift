@@ -19,7 +19,11 @@ final class AddViewController: UIViewController {
     weak var delegate: AddViewControllerDelegate?
     @IBOutlet private weak var todoTextField: UITextField!
     @IBOutlet private weak var todoRegisterButton: UIButton!
-    @IBOutlet weak var prioritySegment: UISegmentedControl!
+    @IBOutlet weak var prioritySegment: UISegmentedControl! {
+        didSet {
+            prioritySegment.addTarget(self, action: #selector(todoRegisterButtonEnabled), for: .valueChanged)
+        }
+    }
 
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -27,7 +31,7 @@ final class AddViewController: UIViewController {
         todoTextField.delegate = self
         todoRegisterButton.isEnabled = false
         todoRegisterButton.backgroundColor = .darkGray
-        prioritySegment.selectedSegmentIndex = -1
+        prioritySegment.isEnabled = false
     }
     // MARK: - function
     @IBAction func tapTodoRegister(_ sender: Any) { //+Todo追加ボタン押下時
@@ -44,16 +48,21 @@ final class AddViewController: UIViewController {
             delegate?.tapAddTodoButton() //
         }
     }
+    
+    @IBAction func todoRegisterButtonEnabled(_ sender: Any) {
+        todoRegisterButton.isEnabled = true
+        todoRegisterButton.backgroundColor = .systemGreen
+    }
 }
 // MARK: - todoTextFieldDelegate
 extension AddViewController: UITextFieldDelegate {
     internal func textFieldDidChangeSelection(_ textField: UITextField) {
-        if  todoTextField.text?.isEmpty ?? true || prioritySegment.selectedSegmentIndex == -1 {
-            todoRegisterButton.isEnabled = false
+        if  todoTextField.text?.isEmpty ?? true {
+            prioritySegment.isEnabled = false
             todoRegisterButton.backgroundColor = .darkGray
         } else {
-            todoRegisterButton.isEnabled = true
-            todoRegisterButton.backgroundColor = .systemGreen
+            prioritySegment.isEnabled = true
+            prioritySegment.selectedSegmentIndex = -1 
         }
     }
 
