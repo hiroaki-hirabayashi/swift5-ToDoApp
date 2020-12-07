@@ -36,14 +36,17 @@ final class AddViewController: UIViewController {
     // MARK: - function
     @IBAction func tapTodoRegister(_ sender: Any) { //+Todo追加ボタン押下時
         let realm = try! Realm()
-        if let text = todoTextField.text {
+        let selectedIndex = prioritySegment.selectedSegmentIndex
+        let text = todoTextField.text
+        if  text != nil && selectedIndex != nil{
             let todo = Todo()
-            todo.text = text
+            todo.text = text!
+            todo.selectedIndex = selectedIndex
             
             try! realm.write {
                 realm.add(todo)
             }
-            
+            print(selectedIndex, "123")
             navigationController?.popViewController(animated: true)
             delegate?.tapAddTodoButton()
         }
