@@ -24,7 +24,6 @@ class TodoViewController: UIViewController {
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         //インスタンス化
-        let realm = try! Realm()
         todoList = realm.objects(Todo.self)
         todoList = try! Realm().objects(Todo.self).sorted(byKeyPath: "selectedIndex", ascending: false)
 
