@@ -56,7 +56,7 @@ class TodoViewController: UIViewController {
     @IBAction func tapAddScreenTransitionButton(_ sender: Any) {
         let storyboard = UIStoryboard(name: "AddTodo", bundle: nil)
         let addVC = storyboard.instantiateViewController(identifier: "AddVC") as! AddViewController
-        addVC.delegate = self
+        addVC.delegate = self //Todo追加をAddViewControllerに渡す
         navigationController?.pushViewController(addVC, animated: true)
    }
 
