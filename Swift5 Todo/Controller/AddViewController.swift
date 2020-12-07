@@ -52,7 +52,7 @@ final class AddViewController: UIViewController {
     // MARK: - function @objc
 
     @objc private func prioritySegmentDidChangeSelection(_ sender: Any) {
-        if todoTextField.text?.isEmpty ?? true {
+        if todoTextField.text?.isEmpty ?? true || todoTextField.text!.count >= 21 {
             todoRegisterButton.isEnabled = false
             todoRegisterButton.backgroundColor = .darkGray
         } else {
@@ -66,7 +66,7 @@ final class AddViewController: UIViewController {
 // MARK: - todoTextFieldDelegate
 extension AddViewController: UITextFieldDelegate {
     internal func textFieldDidChangeSelection(_ textField: UITextField) {
-        if todoTextField.text?.isEmpty ?? true || prioritySegment.selectedSegmentIndex == -1 || todoTextField.text!.count >= 21{
+        if todoTextField.text?.isEmpty ?? true || prioritySegment.selectedSegmentIndex == -1 || todoTextField.text!.count >= 21 {
             todoRegisterButton.isEnabled = false
             todoRegisterButton.backgroundColor = .darkGray
         } else {
