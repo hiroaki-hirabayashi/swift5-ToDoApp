@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 
+
 protocol AddViewControllerDelegate: class {  //一覧画面から委任
     func tapAddTodoButton()
 }
@@ -17,6 +18,7 @@ final class AddViewController: UIViewController {
     
     // MARK: - Propertie
     weak var delegate: AddViewControllerDelegate?
+    private let todoTextFieldMaxLength = 21
     @IBOutlet private weak var todoTextField: UITextField!
     @IBOutlet private weak var todoRegisterButton: UIButton!
     @IBOutlet private weak var prioritySegment: UISegmentedControl! {
@@ -51,9 +53,10 @@ final class AddViewController: UIViewController {
             delegate?.tapAddTodoButton()
         }
     }
-    
+    // MARK: - function @objc
+
     @objc private func prioritySegmentDidChangeSelection(_ sender: Any) {
-        if todoTextField.text?.isEmpty ?? true {
+        if todoTextField.text?.isEmpty ?? true || todoTextField.text!.count >= todoTextFieldMaxLength {
             todoRegisterButton.isEnabled = false
             todoRegisterButton.backgroundColor = .darkGray
         } else {
@@ -61,12 +64,13 @@ final class AddViewController: UIViewController {
             todoRegisterButton.backgroundColor = .systemGreen
         }
     }
+    
 }
 
 // MARK: - todoTextFieldDelegate
 extension AddViewController: UITextFieldDelegate {
     internal func textFieldDidChangeSelection(_ textField: UITextField) {
-        if todoTextField.text?.isEmpty ?? true || prioritySegment.selectedSegmentIndex == -1 {
+        if todoTextField.text?.isEmpty ?? true || prioritySegment.selectedSegmentIndex == -1 || todoTextField.text!.count >= todoTextFieldMaxLength {
             todoRegisterButton.isEnabled = false
             todoRegisterButton.backgroundColor = .darkGray
         } else {
