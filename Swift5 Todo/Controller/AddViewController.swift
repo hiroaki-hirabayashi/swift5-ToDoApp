@@ -36,9 +36,12 @@ final class AddViewController: UIViewController {
     // MARK: - function
     @IBAction func tapTodoRegister(_ sender: Any) { //+Todo追加ボタン押下時
         let realm = try! Realm()
+        let selectedIndex = prioritySegment.selectedSegmentIndex
+        
         if let text = todoTextField.text {
             let todo = Todo()
             todo.text = text
+            todo.selectedIndex = selectedIndex
             
             try! realm.write {
                 realm.add(todo)

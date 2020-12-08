@@ -23,9 +23,7 @@ class TodoViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        //インスタンス化
-        let realm = try! Realm()
-        todoList = realm.objects(Todo.self)
+        todoList = realm.objects(Todo.self)//インスタンス化
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,8 +56,8 @@ class TodoViewController: UIViewController {
         let addVC = storyboard.instantiateViewController(identifier: "AddVC") as! AddViewController
         addVC.delegate = self //Todo追加をAddViewControllerに渡す
         navigationController?.pushViewController(addVC, animated: true)
-   }
-
+    }
+    
 }
 
 // MARK: - UITableViewDataSource
