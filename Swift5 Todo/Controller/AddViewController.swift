@@ -9,7 +9,6 @@
 import UIKit
 import RealmSwift
 
-
 protocol AddViewControllerDelegate: class {  //一覧画面から委任
     func tapAddTodoButton()
 }

@@ -16,7 +16,6 @@ class TodoViewController: UIViewController {
     private let realm = try! Realm()
     //Realmから受け取るデータを入れる変数
     private var todoList: Results<Todo>!
-    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
