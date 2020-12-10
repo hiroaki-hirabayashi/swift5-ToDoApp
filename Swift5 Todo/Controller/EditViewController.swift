@@ -25,7 +25,6 @@ final class EditViewController: UIViewController {
     @IBOutlet weak var todoUpdateButton: UIButton!
     private var didChangeCancellable: AnyCancellable? //Combineを使ってNotificationを受け取る
     
-    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +39,6 @@ final class EditViewController: UIViewController {
                 self.todoUpdateButton.isEnabled = self.todoTextField.text?.isEmpty ?? true ? false : true
                 self.todoUpdateButton.backgroundColor = self.todoTextField.text?.isEmpty ?? true ? .gray : .systemOrange
             })
-        
     }
     // MARK: - function
     @IBAction func tapEditButton(_ sender: Any) {
