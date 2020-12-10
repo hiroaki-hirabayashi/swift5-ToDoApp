@@ -34,18 +34,11 @@ final class EditViewController: UIViewController {
         
         didChangeCancellable = NotificationCenter.default
             .publisher(for: UITextField.textDidChangeNotification, object: todoTextField)
-            .sink(receiveValue: { (notification) in
-                if let editText = notification.object as? UITextField {
-                    if let editTodo = editText.text {
-                        if editTodo.isEmpty ?? true {
-                            self.todoUpdateButton.isEnabled = false
-                            self.todoUpdateButton.backgroundColor = .gray
-                        } else {
-                            self.todoUpdateButton.isEnabled = true
-                            self.todoUpdateButton.backgroundColor = .orange
-                        }
-                    }
-                }
+            .compactMap { $0.object as? UITextField } //notification.objectがUITextFieldにキャストできるものだけ次に進む
+            .compactMap { $0.text?.isEmpty ?? false } //上から渡されたTextFieldが空かどうか
+            .sink(receiveValue: { isInputTextEmpty in //TextFieldに入力された文字が空かどうかが渡される
+                self.todoUpdateButton.isEnabled = self.todoTextField.text?.isEmpty ?? true ? false : true
+                self.todoUpdateButton.backgroundColor = self.todoTextField.text?.isEmpty ?? true ? .gray : .systemOrange
             })
         
     }
