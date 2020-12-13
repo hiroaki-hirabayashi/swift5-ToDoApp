@@ -9,7 +9,6 @@
 import UIKit
 import RealmSwift
 import Combine
-
 protocol EditViewControllerDelegate: class { //一覧画面から委任
     func tapEditButton(indexPath: IndexPath)
 }
@@ -55,8 +54,6 @@ final class EditViewController: UIViewController {
                 self.todoUpdateButton.backgroundColor = isInputTextEmpty ? .gray : .systemIndigo
                })
 
-
-        
     }
     // MARK: - function
     @IBAction func tapEditButton(_ sender: Any) {
