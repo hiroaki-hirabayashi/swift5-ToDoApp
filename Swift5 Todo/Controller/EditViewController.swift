@@ -65,9 +65,3 @@ final class EditViewController: UIViewController {
         delegate?.tapEditButton(indexPath: returnIndexPath)  //一覧画面から渡されたindexPathをそのまま返す
     }
 }
-
-
-
-
-
-
