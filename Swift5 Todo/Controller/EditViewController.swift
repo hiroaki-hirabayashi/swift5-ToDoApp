@@ -23,9 +23,12 @@ final class EditViewController: UIViewController {
     weak var delegate: EditViewControllerDelegate?
     @IBOutlet weak var todoTextField: UITextField!
     @IBOutlet weak var todoUpdateButton: UIButton!
-    private var didChangeCancellable: AnyCancellable? //Combineを使ってNotificationを受け取る
-    private var didChangeButtonColorCancellable: AnyCancellable?
-    
+    private var didChangeCancellableIsEnabled: AnyCancellable? //Combineを使ってNotificationを受け取る
+    private var didChangeCancellableButtonColor: AnyCancellable?
+    private lazy var publisher = NotificationCenter.default
+        .publisher(for: UITextField.textDidChangeNotification, object: todoTextField)
+        .compactMap { $0.object as? UITextField }
+        .share()
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,17 +50,25 @@ final class EditViewController: UIViewController {
 //                    }
 //                }
 //            })
-        didChangeCancellable = NotificationCenter.default
-            .publisher(for: UITextField.textDidChangeNotification, object: todoTextField)
-            .compactMap { $0.object as? UITextField } //notification.objectがUITextFieldにキャストできるものだけ次に進む
-            .compactMap { $0.text?.count ?? 1 >= 1 } //上から渡されたTextField.textの文字数が1文字以上か
+//        didChangeCancellable = NotificationCenter.default
+//            .publisher(for: UITextField.textDidChangeNotification, object: todoTextField)
+//            .compactMap { $0.object as? UITextField } //notification.objectがUITextFieldにキャストできるものだけ次に進む
+//            .compactMap { $0.text?.count ?? 1 >= 1 } //上から渡されたTextField.textの文字数が1文字以上か
+//            .assign(to: \.isEnabled, on: todoUpdateButton)
+//
+//        didChangeButtonColorCancellable = NotificationCenter.default
+//            .publisher(for: UITextField.textDidChangeNotification, object: todoTextField)
+//            .compactMap { $0.object as? UITextField }
+//            .compactMap { $0.text?.isEmpty ?? true ? .gray : .systemPurple }
+//            .assign(to: \.backgroundColor, on: todoUpdateButton)
+        didChangeCancellableIsEnabled = publisher
+            .compactMap { $0.text?.count ?? 1 >= 1 }
             .assign(to: \.isEnabled, on: todoUpdateButton)
         
-        didChangeButtonColorCancellable = NotificationCenter.default
-            .publisher(for: UITextField.textDidChangeNotification, object: todoTextField)
-            .compactMap { $0.object as? UITextField }
-            .compactMap { $0.text?.isEmpty ?? true ? .gray : .systemPurple }
+        didChangeCancellableButtonColor = publisher
+            .compactMap { $0.text?.isEmpty ?? true ? .gray : .systemGreen }
             .assign(to: \.backgroundColor, on: todoUpdateButton)
+
         
     }
     // MARK: - function
